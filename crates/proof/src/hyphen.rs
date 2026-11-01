@@ -1202,7 +1202,17 @@ mod tests {
     #[test]
     fn serbian_digraphs_count_as_one_letter() {
         let sr = |w: &str| hyphenate_word_in(w, &Limits::default(), ProofLang::Sr);
-        for (latin, cyrillic) in [("njive", "њиве"), ("ljudi", "људи"), ("konja", "коња"), ("Džaci", "Џаци")] {
+        for (latin, cyrillic) in [
+            ("njive", "њиве"),
+            ("ljudi", "људи"),
+            ("konja", "коња"),
+            ("Džaci", "Џаци"),
+            ("Njive", "Њиве"),
+            ("Ljudi", "Људи"),
+            ("NJIVE", "ЊИВЕ"),
+            ("LJUDI", "ЉУДИ"),
+            ("DŽACI", "ЏАЦИ"),
+        ] {
             assert_eq!(sr(latin), latin);
             assert_eq!(sr(cyrillic), cyrillic);
         }
